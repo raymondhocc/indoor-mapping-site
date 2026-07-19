@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indoor Mapping — AI + Telegram | Mini App</title>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f6fb;color:#222;margin:0;padding:0}
+.wrap{max-width:560px;margin:0 auto;padding:18px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 4px 18px rgba(0,0,0,.08);margin-bottom:16px}
+h1{color:#2563eb;font-size:1.5em;margin:0 0 6px}
+h2{color:#2563eb;font-size:1.15em;margin:0 0 10px}
+.tag{display:inline-block;background:#e0edff;color:#2563eb;border-radius:20px;padding:3px 10px;font-size:.78em;margin:2px}
+.tabs{display:flex;gap:8px;margin:14px 0}
+.tab{flex:1;text-align:center;background:#eef2ff;color:#2563eb;border:none;border-radius:10px;padding:10px;font-weight:600;cursor:pointer}
+.tab.active{background:#2563eb;color:#fff}
+#panel{min-height:120px}
+.panelbox{background:#f0f5ff;border-radius:10px;padding:14px;border-left:4px solid #2563eb}
+.panelbox b{color:#1e40af}
+.cta{display:block;text-align:center;background:#2563eb;color:#fff;padding:13px;border-radius:40px;text-decoration:none;font-weight:700;margin-top:14px}
+.note{font-size:.82em;color:#667}
+.whatsapp-btn{display:block;text-align:center;background:#25D366;color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:700;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>📍 Indoor Mapping + AI + Telegram</h1>
+    <p><span class="tag">HK</span><span class="tag">China</span><span class="tag">Taiwan</span><span class="tag">Japan</span><span class="tag">Care-tech</span><span class="tag">Malls</span></p>
+    <p style="font-size:.92em">We deploy <b>indoor blue-dot navigation</b> + a <b>Telegram alert & AI-analytics layer</b> that map vendors (Mapxus, Mappedin) don't sell themselves.</p>
+  </div>
+  <div class="card">
+    <h2>Choose how to start</h2>
+    <div class="tabs">
+      <button class="tab active" hx-get="partials/a.html" hx-target="#panel" hx-swap="innerHTML">A · Free plan</button>
+      <button class="tab" hx-get="partials/b.html" hx-target="#panel" hx-swap="innerHTML">B · Build app</button>
+      <button class="tab" hx-get="partials/c.html" hx-target="#panel" hx-swap="innerHTML">C · Full deploy</button>
+    </div>
+    <div id="panel">
+      <div class="panelbox"><b>Option A — Free plan & consultation.</b> 30-min call + a tailored scope doc for your venue. No cost. Best first step to see the fit.</div>
+    </div>
+  </div>
+  <div class="card" id="request">
+    <h2>Request your plan</h2>
+    <div id="result" class="note"></div>
+    <a class="cta" href="https://t.me/rachel_indoor_2_bot?text=I%20want%20Option%20A%20%E2%80%94%20please%20send%20me%20details" target="_blank" rel="noopener">💬 Apply via Telegram →</a>
+    <p class="note" style="margin-top:8px">Tap above to open Telegram and send your request automatically.</p>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+  });
+});
+function setApplyHref(option){
+  var text = encodeURIComponent('I want Option ' + option + ' — please send me details');
+  document.getElementById('applyBtn').href = 'https://t.me/rachel_indoor_2_bot?text=' + text;
+}
+document.querySelectorAll('.tab').forEach(b=>{
+  b.addEventListener('click',()=>{
+    var opt = b.textContent.split('·')[0].trim();
+    setApplyHref(opt);
+  });
+});
+setApplyHref('A');
+</script>
+</body>
+</html>
